@@ -13,7 +13,7 @@
  * @copyright Copyright (c) 2008 Yii Software LLC
  * @license http://www.yiiframework.com/license/
  */
-
+clearScreen();
 if (!extension_loaded('mcrypt')) {
     die('The mcrypt PHP extension is required by Yii2.');
 }
@@ -201,5 +201,14 @@ function createSymlink($links)
         if (!is_link($link)) {
             symlink($target, $link);
         }
+    }
+}
+
+function clearScreen()
+{
+    if (preg_match('/^win/i', PHP_OS)) {
+        popen('cls', 'w');
+    } else {
+        exec('clear');
     }
 }
